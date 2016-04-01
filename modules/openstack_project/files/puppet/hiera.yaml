@@ -8,10 +8,11 @@
   - "%{::environment}/hiera/fqdn/%{::fqdn}"
   - "%{::environment}/hiera/group/%{group}" # no :: because group is set at nodescope
   - "%{::environment}/hiera/common"
+  - "murano"
 :backends:
   - yaml
 :yaml:
-  :datadir: "/opt/system-config/"
+  :datadir: "/etc/puppet/hieradata/"
 
 
 # File directory structure:
