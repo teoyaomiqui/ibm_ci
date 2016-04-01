@@ -473,37 +473,39 @@ class openstack_project::gerrit (
       require => Class['::gerrit']
     }
 
-    if ($testmode == false) {
-      exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects -v -l /var/log/manage_projects.log',
-        timeout     => 1800, # 30 minutes
-        subscribe   => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-          ],
-        refreshonly => true,
-        logoutput   => true,
-        require     => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-            Class['jeepyb'],
-          ],
-      }
+    #Currently we are managing projects from the separate
+    #puppet manifest under murano CI/CD application
+    # if ($testmode == false) {
+    #   exec { 'manage_projects':
+    #     command     => '/usr/local/bin/manage-projects -v -l /var/log/manage_projects.log',
+    #     timeout     => 1800, # 30 minutes
+    #     subscribe   => [
+    #         File['/home/gerrit2/projects.yaml'],
+    #         File['/home/gerrit2/acls'],
+    #       ],
+    #     refreshonly => true,
+    #     logoutput   => true,
+    #     require     => [
+    #         File['/home/gerrit2/projects.yaml'],
+    #         File['/home/gerrit2/acls'],
+    #         Class['jeepyb'],
+    #       ],
+    #   }
 
-      include logrotate
-      logrotate::file { 'manage_projects.log':
-        log     => '/var/log/manage_projects.log',
-        options => [
-          'compress',
-          'missingok',
-          'rotate 30',
-          'daily',
-          'notifempty',
-          'copytruncate',
-        ],
-        require => Exec['manage_projects'],
-      }
-    }
+    #   include logrotate
+    #   logrotate::file { 'manage_projects.log':
+    #     log     => '/var/log/manage_projects.log',
+    #     options => [
+    #       'compress',
+    #       'missingok',
+    #       'rotate 30',
+    #       'daily',
+    #       'notifempty',
+    #       'copytruncate',
+    #     ],
+    #     require => Exec['manage_projects'],
+    #   }
+    # }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
     ensure  => absent,
