@@ -111,6 +111,7 @@ class openstack_project::gerrit (
   class { '::gerrit':
     vhost_name                          => $vhost_name,
     canonicalweburl                     => $canonicalweburl,
+    redirect_to_canonicalweburl         => false,
     # opinions
     allow_drafts                        => false,
     enable_melody                       => true,
