@@ -46,10 +46,11 @@ class openstack_project::review (
   $mysql_password = '',
   $email_private_key = '',
   $token_private_key = '',
-  # Register an IRC bot and supply it's password here.
-  $gerritbot_password = '',
-  $gerritbot_ssh_rsa_key_contents = '',
-  $gerritbot_ssh_rsa_pubkey_contents = '',
+#  NOTE: disable gerrit bot for app
+#  # Register an IRC bot and supply it's password here.
+#  $gerritbot_password = '',
+#  $gerritbot_ssh_rsa_key_contents = '',
+#  $gerritbot_ssh_rsa_pubkey_contents = '',
   # Register SSL keys and pass their contents in.
   $ssl_cert_file = "/etc/ssl/certs/${::fqdn}.pem",
   $ssl_cert_file_contents = '',
@@ -220,17 +221,18 @@ class openstack_project::review (
     version => '3fefa35',
   }
 
-  class { 'gerritbot':
-    nick                    => 'openstackgerrit',
-    password                => $gerritbot_password,
-    server                  => 'irc.freenode.net',
-    user                    => 'gerritbot',
-    vhost_name              => $::fqdn,
-    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
-    channel_file            => $::project_config::gerritbot_channel_file,
-    require                 => $::project_config::config_dir,
-  }
+#  NOTE: disable gerrit bot for app
+#  class { 'gerritbot':
+#    nick                    => 'openstackgerrit',
+#    password                => $gerritbot_password,
+#    server                  => 'irc.freenode.net',
+#    user                    => 'gerritbot',
+#    vhost_name              => $::fqdn,
+#    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
+#    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+#    channel_file            => $::project_config::gerritbot_channel_file,
+#    require                 => $::project_config::config_dir,
+#  }
   class { 'gerrit::remotes':
     ensure => absent,
   }
