@@ -119,7 +119,7 @@ class openstack_project::review (
     index_threads                       => 4,
     httpd_maxqueued                     => '200',
     war                                 =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.11.a14450f.war',
+      'http://tarballs.openstack.org/ci/test/gerrit-v2.11.9.3.eb6e48d.war',
     contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
