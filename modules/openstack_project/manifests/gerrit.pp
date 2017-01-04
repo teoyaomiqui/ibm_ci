@@ -84,6 +84,7 @@ class openstack_project::gerrit (
   $report_bug_text = 'Get Help',
   $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
   $index_threads = 1,
+  $java_home = '',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -137,6 +138,7 @@ class openstack_project::gerrit (
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     email                               => $email,
     openidssourl                        => 'https://login.launchpad.net/+openid',
+    java_home                           => $java_home,
     database_poollimit                  => $database_poollimit,
     container_heaplimit                 => $container_heaplimit,
     core_packedgitopenfiles             => $core_packedgitopenfiles,
